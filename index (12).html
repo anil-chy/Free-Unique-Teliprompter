@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ============================================================
+       BASIC META TAGS
+  ============================================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary SEO Meta -->
+  <title>Free Online Teleprompter Tool – PrompterPro | Script Reader for Videos</title>
+  <meta name="description" content="Use PrompterPro's free online teleprompter tool to read scripts smoothly while recording videos. Perfect for YouTubers, presenters, and public speakers. No download needed.">
+  <meta name="keywords" content="free online teleprompter tool, online teleprompter tool, free teleprompter website, teleprompter script reader, video teleprompter online, professional teleprompter, video script tool">
+  <meta name="author" content="PrompterPro">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.prompterpro.online/">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.prompterpro.online/">
+  <meta property="og:title" content="Free Online Teleprompter Tool – PrompterPro">
+  <meta property="og:description" content="Read scripts smoothly while recording with PrompterPro's free teleprompter tool. No downloads. Works in your browser instantly.">
+  <meta property="og:image" content="https://www.prompterpro.online/og-image.png">
+  <meta property="og:site_name" content="PrompterPro">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Online Teleprompter Tool – PrompterPro">
+  <meta name="twitter:description" content="Read scripts smoothly while recording with PrompterPro's free teleprompter tool.">
+  <meta name="twitter:image" content="https://www.prompterpro.online/og-image.png">
+
+  <!-- Fonts and Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Lora:400,400i" rel="stylesheet">
+
+  <!-- Canvas Confetti Library for Animations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- ============================================================
+       STYLESHEET
+  ============================================================ -->
+  <style>
+    :root {
+      --dark-bg: #0A1128;
+      --primary-cyan: #00F0FF;
+      --secondary-blue: #007BFF;
+      --text-light: #E0EAFC;
+      --accent-purple: #B042F4;
+      --card-bg: #1C2541;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --panel-bg: rgba(255, 255, 255, 0.05);
+      --button-primary: var(--primary-cyan);
+      --button-text-color: var(--dark-bg);
+    }
+
+    /* ---- Reset & Base ---- */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body { background: var(--dark-bg); color: var(--text-light); line-height: 1.7; overflow-x: hidden; }
+
+    /* ---- Skip Link (Accessibility) ---- */
+    .skip-link { position: absolute; top: -100px; left: 0; background: var(--primary-cyan); color: var(--dark-bg); padding: 0.5rem 1rem; font-weight: 700; z-index: 9999; transition: top 0.2s; }
+    .skip-link:focus { top: 0; }
+
+    /* ============================================================
+       HEADER & NAVIGATION
+    ============================================================ */
+    header.header {
+      background: var(--card-bg);
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: fadeInDown 0.8s ease-out;
+      box-shadow: 0 2px 15px var(--shadow-color);
+      flex-wrap: wrap;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo { display: flex; align-items: center; transform: scale(1.05); text-decoration: none; }
+    .logo-circle { width: 52px; height: 52px; background: linear-gradient(135deg, var(--primary-cyan), var(--secondary-blue)); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 1rem; box-shadow: 0 4px 10px var(--shadow-color); flex-shrink: 0; }
+    .logo-circle span { font-size: 1.5rem; font-weight: bold; color: var(--card-bg); }
+    .logo-text { color: var(--primary-cyan); font-size: 1.8rem; font-weight: 700; letter-spacing: -1px; text-shadow: 2px 2px 4px var(--shadow-color); transition: color 0.3s ease; }
+    .logo:hover .logo-text { color: var(--accent-purple); }
+
+    /* Nav Menu */
+    nav.main-nav { display: flex; align-items: center; gap: 0.2rem; flex-wrap: wrap; }
+    nav.main-nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      padding: 0.45rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: background 0.25s, color 0.25s;
+      white-space: nowrap;
+    }
+    nav.main-nav a:hover,
+    nav.main-nav a.active { background: var(--primary-cyan); color: var(--dark-bg); }
+
+    /* Hamburger */
+    .hamburger { display: none; background: none; border: 2px solid var(--primary-cyan); border-radius: 8px; color: var(--primary-cyan); padding: 0.4rem 0.7rem; cursor: pointer; font-size: 1.1rem; }
+    @media (max-width: 860px) {
+      .hamburger { display: block; }
+      nav.main-nav { display: none; width: 100%; flex-direction: column; align-items: flex-start; background: var(--card-bg); padding: 0.5rem 0; border-top: 1px solid rgba(255,255,255,0.08); }
+      nav.main-nav.open { display: flex; }
+      nav.main-nav a { width: 100%; padding: 0.6rem 1rem; border-radius: 0; }
+    }
+
+    /* ============================================================
+       PAGE SECTIONS (single-page routing)
+    ============================================================ */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    /* ============================================================
+       AD PLACEHOLDERS
+    ============================================================ -->
+    /* Google AdSense placeholders — replace with real ad code after approval */
+    .ad-slot {
+      background: rgba(255,255,255,0.04);
+      border: 1px dashed rgba(0,240,255,0.25);
+      border-radius: 10px;
+      text-align: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.75rem;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .ad-slot-top    { width: 100%; min-height: 90px;  max-height: 90px; margin: 0 auto 1.2rem; }
+    .ad-slot-footer { width: 100%; min-height: 90px;  max-height: 90px; margin: 1.2rem auto 0; }
+    .ad-slot-inline { width: 100%; min-height: 250px; max-height: 280px; margin: 2rem auto; }
+    .ad-slot-sidebar{ width: 100%; min-height: 600px; }
+    @media (max-width: 768px) {
+      .ad-slot-sidebar { min-height: 250px; }
+    }
+
+    /* ============================================================
+       MAIN TOOL CONTAINER (original design — unchanged)
+    ============================================================ */
+    .tool-wrapper { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+
+    main.container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: var(--card-bg);
+      border-radius: 25px;
+      box-shadow: 0 12px 35px var(--shadow-color);
+    }
+
+    /* Controls Section — ORIGINAL unchanged */
+    section.controls { background: var(--panel-bg); padding: 1.5rem; border-radius: 15px; box-shadow: inset 0 0 10px var(--shadow-color); margin-bottom: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; align-items: center; }
+    section.controls label { color: var(--text-light); font-size: 0.9rem; margin-bottom: 0.3rem; display: block; }
+    section.controls input[type="text"], section.controls input[type="number"], section.controls input[type="color"], section.controls select, section.controls input[type="file"] { width: 100%; padding: 0.5rem 0.8rem; margin-bottom: 0.8rem; border-radius: 8px; border: 2px solid var(--secondary-blue); background-color: var(--dark-bg); color: var(--text-light); font-size: 0.9rem; transition: border-color 0.3s ease, box-shadow 0.3s ease; outline: none; }
+    section.controls input:focus, section.controls select:focus { border-color: var(--primary-cyan); box-shadow: 0 0 0 2px var(--primary-cyan); }
+    section.controls input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: var(--primary-cyan); border-radius: 5px; cursor: pointer; margin-bottom: 0.8rem; }
+    section.controls input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: var(--primary-cyan); border-radius: 50%; cursor: pointer; box-shadow: 0 0 0 3px var(--card-bg); }
+    section.controls input[type="checkbox"] { -webkit-appearance: none; appearance: none; background-color: var(--dark-bg); border: 2px solid var(--primary-cyan); border-radius: 5px; width: 16px; height: 16px; cursor: pointer; position: relative; vertical-align: middle; margin-right: 4px; }
+    section.controls input[type="checkbox"]:checked { background-color: var(--primary-cyan); }
+    section.controls input[type="checkbox"]:focus { outline: none; box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.5); }
+    section.controls input[type="checkbox"]:checked::before { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 10px; color: var(--dark-bg); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+    /* Prompter Area — ORIGINAL unchanged */
+    .prompter-area { display: flex; align-items: center; gap: 1.5rem; }
+    section.teleprompter-wrapper { position: relative; background-color: #000; background-position: center; background-repeat: no-repeat; background-size: cover; overflow: hidden; border-radius: 15px; box-shadow: 0 15px 40px var(--shadow-color); aspect-ratio: 16/9; margin: 0; flex-grow: 1; width: 100%; transition: aspect-ratio 0.3s ease; }
+    #bgVideo { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; display: none; }
+    .teleprompter { background-color: transparent; border: none; padding: 20px; font-size: 40px; line-height: 1.4; font-family: 'Lora', serif; color: white; position: absolute; top: 0; left: 0; width: 100%; text-align: center; white-space: pre-wrap; z-index: 2; will-change: transform; transition: width 0.3s ease, left 0.3s ease, right 0.3s ease; box-sizing: border-box; }
+    .display-controls { display: flex; flex-direction: column; justify-content: center; gap: 1.5rem; }
+    .display-controls button { background: radial-gradient(circle, #99ffff, var(--primary-cyan)); color: #000; border: 3px solid #000; padding: 0.8rem 2rem; border-radius: 30px; cursor: pointer; font-size: 1.1rem; font-weight: 700; transition: transform 0.2s ease-out, box-shadow 0.3s ease; box-shadow: 0 4px 10px var(--shadow-color); outline: none; }
+    .display-controls button:hover { transform: translateY(-2px); box-shadow: 0 5px 12px var(--shadow-color); }
+
+    /* ============================================================
+       CONTENT PAGES SHARED STYLES
+    ============================================================ */
+    .content-page { max-width: 900px; margin: 2.5rem auto; padding: 0 1.5rem 4rem; }
+    .content-page h1 { color: var(--primary-cyan); font-size: 2rem; margin-bottom: 0.5rem; }
+    .content-page .page-subtitle { color: rgba(224,234,252,0.65); font-size: 1rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .content-page h2 { color: var(--primary-cyan); font-size: 1.35rem; margin: 2rem 0 0.75rem; }
+    .content-page h3 { color: var(--text-light); font-size: 1.1rem; margin: 1.5rem 0 0.5rem; }
+    .content-page p { color: rgba(224,234,252,0.85); margin-bottom: 1.1rem; font-size: 0.97rem; }
+    .content-page ul, .content-page ol { color: rgba(224,234,252,0.85); padding-left: 1.6rem; margin-bottom: 1.1rem; font-size: 0.97rem; }
+    .content-page li { margin-bottom: 0.45rem; }
+    .content-page a { color: var(--primary-cyan); text-decoration: underline; }
+
+    /* Contact Form */
+    .contact-form { display: grid; gap: 1.2rem; margin-top: 1.5rem; }
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--panel-bg);
+      border: 2px solid rgba(0,240,255,0.2);
+      border-radius: 10px;
+      color: var(--text-light);
+      font-size: 0.95rem;
+      font-family: 'Poppins', sans-serif;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--primary-cyan); }
+    .contact-form textarea { min-height: 140px; resize: vertical; }
+    .contact-form button {
+      background: linear-gradient(135deg, var(--primary-cyan), var(--secondary-blue));
+      color: var(--dark-bg);
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      padding: 0.85rem 2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: opacity 0.25s, transform 0.2s;
+      width: max-content;
+    }
+    .contact-form button:hover { opacity: 0.88; transform: translateY(-2px); }
+    #contactSuccess { display: none; color: var(--primary-cyan); font-weight: 600; margin-top: 0.8rem; }
+
+    /* FAQ Accordion */
+    .faq-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      text-align: left;
+      padding: 1rem 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--primary-cyan); }
+    .faq-question .faq-icon { font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; }
+    .faq-question.open .faq-icon { transform: rotate(45deg); color: var(--primary-cyan); }
+    .faq-answer { display: none; padding: 0 0 1rem; color: rgba(224,234,252,0.8); font-size: 0.95rem; }
+    .faq-answer.open { display: block; }
+
+    /* Article layout with sidebar */
+    .article-layout { display: grid; grid-template-columns: 1fr 300px; gap: 2.5rem; max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem 4rem; align-items: start; }
+    .article-sidebar { position: sticky; top: 90px; }
+    .toc-box { background: var(--card-bg); border-radius: 14px; padding: 1.4rem; border: 1px solid rgba(0,240,255,0.12); margin-bottom: 1.5rem; }
+    .toc-box h4 { color: var(--primary-cyan); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
+    .toc-box ol { padding-left: 1.2rem; }
+    .toc-box li { margin-bottom: 0.5rem; }
+    .toc-box a { color: rgba(224,234,252,0.7); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .toc-box a:hover { color: var(--primary-cyan); }
+    @media (max-width: 900px) {
+      .article-layout { grid-template-columns: 1fr; }
+      .article-sidebar { position: static; }
+    }
+
+    /* Article content */
+    .article-content h1 { color: var(--primary-cyan); font-size: 1.9rem; margin-bottom: 0.5rem; line-height: 1.3; }
+    .article-content .article-meta { color: rgba(224,234,252,0.5); font-size: 0.82rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .article-content h2 { color: var(--primary-cyan); font-size: 1.3rem; margin: 2.2rem 0 0.8rem; scroll-margin-top: 100px; }
+    .article-content h3 { color: var(--text-light); font-size: 1.05rem; margin: 1.6rem 0 0.5rem; }
+    .article-content p { color: rgba(224,234,252,0.85); margin-bottom: 1.1rem; font-size: 0.97rem; }
+    .article-content ul, .article-content ol { color: rgba(224,234,252,0.85); padding-left: 1.6rem; margin-bottom: 1.1rem; font-size: 0.97rem; }
+    .article-content li { margin-bottom: 0.5rem; }
+    .highlight-box { background: rgba(0,240,255,0.07); border-left: 4px solid var(--primary-cyan); border-radius: 0 10px 10px 0; padding: 1rem 1.4rem; margin: 1.5rem 0; }
+    .highlight-box p { margin: 0; font-size: 0.95rem; }
+    .step-list { counter-reset: steps; list-style: none; padding-left: 0; }
+    .step-list li { counter-increment: steps; display: flex; gap: 1rem; margin-bottom: 1.2rem; align-items: flex-start; }
+    .step-list li::before { content: counter(steps); background: linear-gradient(135deg, var(--primary-cyan), var(--secondary-blue)); color: var(--dark-bg); font-weight: 700; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; margin-top: 2px; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer.site-footer {
+      background: var(--card-bg);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 2.5rem 2rem 1.5rem;
+      margin-top: 3rem;
+    }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+    .footer-col h5 { color: var(--primary-cyan); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1rem; }
+    .footer-col p { color: rgba(224,234,252,0.55); font-size: 0.85rem; line-height: 1.7; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.6rem; }
+    .footer-col ul li a { color: rgba(224,234,252,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--primary-cyan); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.2rem; display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: space-between; align-items: center; }
+    .footer-bottom p { color: rgba(224,234,252,0.35); font-size: 0.8rem; }
+    .footer-bottom .footer-bottom-links a { color: rgba(224,234,252,0.4); font-size: 0.8rem; text-decoration: none; margin-left: 1rem; }
+    .footer-bottom .footer-bottom-links a:hover { color: var(--primary-cyan); }
+
+    /* ============================================================
+       ANIMATIONS
+    ============================================================ */
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 768px) {
+      header.header { padding: 1rem 1.2rem; }
+      main.container { padding: 1.5rem; border-radius: 15px; }
+      section.controls { grid-template-columns: 1fr; padding: 1rem; }
+      .teleprompter { font-size: 28px; }
+      .prompter-area { flex-direction: column; }
+      .display-controls { flex-direction: row; margin-top: 1.5rem; }
+      .content-page { padding: 0 1rem 3rem; }
+      .article-content h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip to main content for accessibility -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header class="header" role="banner">
+    <a href="#" class="logo" onclick="showPage('home')" aria-label="PrompterPro Home">
+      <div class="logo-circle"><span>PP</span></div>
+      <span class="logo-text">PrompterPro</span>
+    </a>
+
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <nav class="main-nav" id="mainNav" role="navigation" aria-label="Main Navigation">
+      <a href="#" onclick="showPage('home')"    id="nav-home"      class="active">🏠 Home</a>
+      <a href="#" onclick="showPage('article')" id="nav-article">📖 Guide</a>
+      <a href="#" onclick="showPage('about')"   id="nav-about">ℹ️ About</a>
+      <a href="#" onclick="showPage('contact')" id="nav-contact">✉️ Contact</a>
+      <a href="#" onclick="showPage('privacy')" id="nav-privacy">🔒 Privacy</a>
+      <a href="#" onclick="showPage('terms')"   id="nav-terms">📋 Terms</a>
+      <a href="#" onclick="showPage('disclaimer')" id="nav-disclaimer">⚠️ Disclaimer</a>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+       TOP BANNER AD
+  ============================================================ -->
+  <div style="max-width:1200px; margin: 0.8rem auto; padding: 0 1.5rem;">
+    <!-- Google AdSense Ad Slot — Top Banner 728x90 -->
+    <div class="ad-slot ad-slot-top" aria-label="Advertisement">
+      Advertisement
+      <!-- REPLACE THIS COMMENT WITH YOUR ADSENSE LEADERBOARD CODE -->
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE: HOME (Original Teleprompter Tool — unchanged)
+  ============================================================ -->
+  <div id="page-home" class="page-section active">
+    <div class="tool-wrapper">
+      <main class="container" role="main" id="main-content">
+        <section class="intro" style="text-align: center; margin-bottom: 2rem;">
+          <h2 style="color: var(--primary-cyan); margin-bottom: 1rem;">Professional Online Teleprompter Tool</h2>
+          <p style="max-width: 800px; margin: 0 auto 1.5rem;">The ultimate tool for smooth presentations, now with video backgrounds and continuous animations!</p>
+        </section>
+
+        <!-- Teleprompter Controls — ORIGINAL unchanged -->
+        <section class="controls" aria-label="Teleprompter Controls">
+          <label for="mediaUpload">Background Media (Image/Video):</label>
+          <input type="file" id="mediaUpload" accept="image/*,video/*">
+          <label for="tpText">Teleprompter Text:</label>
+          <input type="text" id="tpText" placeholder="Enter your script here...">
+          <label for="fontColor">Font Color:</label>
+          <input type="color" id="fontColor" value="#ffffff">
+          <label for="fontSize">Font Size:</label>
+          <input type="range" id="fontSize" min="20" max="100" value="40">
+          <label for="fontFamily">Font Family:</label>
+          <select id="fontFamily">
+            <option value="'Lora', serif">Lora</option>
+            <option value="'Roboto', sans-serif">Roboto</option>
+            <option value="'Times New Roman', serif">Times New Roman</option>
+          </select>
+
+          <label for="lineHeight">Line Spacing:</label>
+          <input type="range" id="lineHeight" min="1.0" max="3.0" value="1.4" step="0.1">
+          <label for="textWidth">Text Width (% of Prompter):</label>
+          <input type="range" id="textWidth" min="50" max="100" value="100" step="5">
+
+          <label for="textPosition">Text Position:</label>
+          <select id="textPosition">
+            <option value="center" selected>Center</option>
+            <option value="left">Left Side</option>
+            <option value="right">Right Side</option>
+          </select>
+
+          <label for="textAlignJustify">Text Justify:</label>
+          <select id="textAlignJustify">
+            <option value="left">Left</option>
+            <option value="center" selected>Center</option>
+            <option value="right">Right</option>
+          </select>
+
+          <label>Text Style:</label>
+          <div>
+            <label><input type="checkbox" id="bold"> Bold</label>
+            <label><input type="checkbox" id="italic"> Italic</label>
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 0.5rem 0;">
+            <label><input type="checkbox" id="stroke"> Stroke</label>
+            <label>Stroke Color: <input type="color" id="strokeColor" value="#000000"></label>
+            <label>Thickness: <span id="strokeThicknessValue">1</span>px <input type="range" id="strokeThickness" min="0" max="10" value="1" step="0.5"></label>
+            <hr style="border-color: rgba(255,255,255,0.1); margin: 0.5rem 0;">
+            <label><input type="checkbox" id="shadow"> Shadow</label>
+            <label>Shadow Color: <input type="color" id="shadowColor" value="#000000"></label>
+            <label>Opacity: <span id="shadowOpacityValue">0.5</span> <input type="range" id="shadowOpacity" min="0" max="1" value="0.5" step="0.1"></label>
+          </div>
+
+          <label for="scrollSpeed">Scroll Speed:</label>
+          <input type="number" id="scrollSpeed" value="1" min="1" max="10">
+          <label for="bgSize">Aspect Ratio:</label>
+          <select id="bgSize">
+            <option value="16:9">16:9</option>
+            <option value="9:16">9:16</option>
+          </select>
+          <label for="animationSelect">Animation Effect:</label>
+          <select id="animationSelect">
+            <option value="none" selected>None</option>
+            <option value="fireworks">Fireworks</option>
+            <option value="flowerRain">Flower Rain</option>
+            <option value="starFall">Star Fall</option>
+            <option value="risingHearts">Rising Hearts</option>
+          </select>
+        </section>
+
+        <!-- Wrapper for Prompter and Buttons -->
+        <div class="prompter-area">
+          <!-- Teleprompter Display Area -->
+          <section class="teleprompter-wrapper" aria-label="Teleprompter Display">
+            <video id="bgVideo" autoplay muted loop playsinline></video>
+            <div class="teleprompter" id="teleprompter">Your text will appear here...</div>
+          </section>
+
+          <!-- Controls Beside Display -->
+          <section class="display-controls" aria-label="Scroll Controls">
+            <button id="scrollControlButton">Start</button>
+            <button id="resetScrollBtn">Reset</button>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE: ARTICLE / SEO CONTENT
+  ============================================================ -->
+  <div id="page-article" class="page-section">
+    <div class="article-layout">
+
+      <!-- Main Article -->
+      <article class="article-content" id="main-content-article">
+        <header>
+          <h1>Free Online Teleprompter Tool: The Complete Guide for YouTubers, Speakers & Presenters</h1>
+          <p class="article-meta">
+            <span><i class="fas fa-calendar-alt"></i> Updated: 2025</span> &nbsp;|&nbsp;
+            <span><i class="fas fa-clock"></i> 12 min read</span> &nbsp;|&nbsp;
+            <span><i class="fas fa-tag"></i> Teleprompter Guide</span>
+          </p>
+        </header>
+
+        <!-- ---- Section 1: Introduction ---- -->
+        <section id="art-intro">
+          <h2>What Is a Teleprompter? A Simple Introduction</h2>
+          <p>
+            If you have ever watched a news anchor deliver a flawless report without looking down at notes, or seen a politician deliver a polished speech staring confidently at the camera, you have already witnessed a teleprompter in action. A teleprompter — sometimes called an autocue — is a device that displays a scrolling script in front of a speaker or camera, allowing them to read their lines while maintaining natural eye contact with their audience.
+          </p>
+          <p>
+            Traditionally, teleprompters were bulky, expensive pieces of broadcast equipment reserved for professional TV studios and high-budget productions. The setup involved a half-silvered mirror mounted in front of a camera lens, reflecting text from a screen below. Only well-funded broadcasters and major production houses could afford them.
+          </p>
+          <p>
+            Today, that has all changed. Thanks to modern web technology, a <strong>free online teleprompter tool</strong> like PrompterPro can replicate the entire experience right inside your browser — no special hardware, no expensive software, and no technical setup required. All you need is a screen, a script, and an internet connection.
+          </p>
+          <div class="highlight-box">
+            <p><strong>PrompterPro</strong> is a completely free teleprompter website designed for content creators, educators, public speakers, and anyone who wants to deliver their message with confidence, clarity, and professional polish — directly from their browser.</p>
+          </div>
+        </section>
+
+        <!-- In-Content Ad Slot -->
+        <!-- Google AdSense Ad Slot — In-Content 300x250 -->
+        <div class="ad-slot ad-slot-inline" aria-label="Advertisement">
+          Advertisement
+          <!-- REPLACE THIS COMMENT WITH YOUR ADSENSE IN-ARTICLE CODE -->
+        </div>
+
+        <!-- ---- Section 2: Benefits ---- -->
+        <section id="art-benefits">
+          <h2>Benefits of Using a Free Teleprompter Website for YouTubers and Speakers</h2>
+          <p>
+            Whether you are a seasoned content creator with millions of subscribers or someone who has just decided to start their very first YouTube channel, a <strong>video teleprompter online</strong> can dramatically improve your recording workflow. Here is why so many creators and professional speakers are switching to browser-based teleprompter tools:
+          </p>
+
+          <h3>1. Deliver Scripts Without Memorization</h3>
+          <p>
+            Memorizing a full script is time-consuming and mentally exhausting. Missing a line mid-recording means starting over or spending hours in post-production editing. With an online teleprompter tool, your complete script scrolls in front of you at your chosen speed, so you never lose your place. You maintain a natural flow, and your recordings come out cleaner on the first take.
+          </p>
+
+          <h3>2. Maintain Natural Eye Contact</h3>
+          <p>
+            Eye contact is one of the most powerful tools for building trust and engagement with your audience. When speakers look down at notes or glance off-camera to read cue cards, viewers subconsciously sense the disconnection. A <strong>teleprompter script reader</strong> placed near or behind the camera lens means you read your lines while appearing to look directly into the camera — creating a sense of genuine connection that audiences respond to.
+          </p>
+
+          <h3>3. Save Enormous Amounts of Time</h3>
+          <p>
+            Content creators who use teleprompters consistently report reducing their recording time by 40–60%. Fewer retakes, fewer bloopers, and less editing time add up to hours saved every week. For professional speakers preparing for presentations, conference talks, or webinars, that time saving is even more significant.
+          </p>
+
+          <h3>4. Improve Delivery Confidence</h3>
+          <p>
+            Nerves are natural, but they can destroy an otherwise great piece of content. Knowing your script is right there in front of you gives you the confidence to slow down, breathe, and focus on delivery rather than desperately trying to remember what comes next. This confidence comes through on camera and makes a noticeable difference in the quality of your final content.
+          </p>
+
+          <h3>5. Completely Free — No Downloads or Installation</h3>
+          <p>
+            Unlike desktop teleprompter software that may cost hundreds of dollars or require complicated installation, a <strong>free teleprompter website</strong> like PrompterPro works entirely in your browser. There is nothing to download, no account to create, and no recurring subscription to pay. Just open the site and start reading.
+          </p>
+
+          <h3>6. Professional Video Backgrounds</h3>
+          <p>
+            PrompterPro goes beyond a simple text scroller. You can upload your own custom video or image as a background, allowing you to frame your shot professionally within the teleprompter display. This makes it easier to set up your camera angle, check your framing, and ensure your script appears cleanly over your chosen backdrop.
+          </p>
+
+          <h3>7. Customizable for Every Use Case</h3>
+          <p>
+            Different speakers have different needs. A fast-paced YouTube creator needs higher scroll speeds and larger text. A conference presenter might need a slower pace with specific fonts. PrompterPro offers complete control over font size, font family, scroll speed, line spacing, text position, text color, stroke, shadow, and even decorative animation effects — making it equally suitable for casual creators and polished professionals.
+          </p>
+        </section>
+
+        <!-- ---- Section 3: How to Use ---- -->
+        <section id="art-how-to">
+          <h2>How to Use PrompterPro: Step-by-Step Guide</h2>
+          <p>
+            Getting started with PrompterPro's <strong>online teleprompter tool</strong> takes less than two minutes. Follow these steps to set up your first teleprompter session:
+          </p>
+
+          <ol class="step-list">
+            <li>
+              <div>
+                <strong>Open PrompterPro in Your Browser</strong><br>
+                Navigate to the PrompterPro website on any desktop, laptop, or tablet. No sign-up or installation is required. The teleprompter tool loads instantly in your browser.
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Type or Paste Your Script</strong><br>
+                Click on the "Teleprompter Text" input field and type your script, or paste it from your document editor. Your text will appear immediately in the teleprompter display area below.
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Upload a Background (Optional)</strong><br>
+                If you want to check your framing or use a specific visual backdrop, click "Background Media" and upload an image or video file from your computer. This background will appear inside the teleprompter display while your text scrolls over it.
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Customize Font and Text Settings</strong><br>
+                Adjust the font color, size, family, line spacing, and width using the control panel. Toggle Bold or Italic styles as needed. Add a text stroke or shadow to improve legibility against complex backgrounds.
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Set Your Scroll Speed</strong><br>
+                Enter a scroll speed in the "Scroll Speed" field. Start with 1–2 for slower, deliberate pacing and increase up to 10 for faster-paced content. You can also adjust this in real-time during playback.
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Choose Your Aspect Ratio</strong><br>
+                Select 16:9 for standard horizontal video (YouTube, presentations) or 9:16 for vertical short-form content (YouTube Shorts, Instagram Reels, TikTok).
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Click Start and Record</strong><br>
+                Press the <strong>Start</strong> button to begin the smooth scrolling animation. Position your camera or recording device so you can read the screen comfortably. Press <strong>Pause</strong> at any time if you need a moment, and <strong>Resume</strong> when ready. Click <strong>Reset</strong> to return to the beginning.
+              </div>
+            </li>
+            <li>
+              <div>
+                <strong>Add an Animation Effect (Optional)</strong><br>
+                For celebratory or engaging videos, select a decorative animation from the "Animation Effect" dropdown — choose from Fireworks, Flower Rain, Star Fall, or Rising Hearts for a fun visual flourish.
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <!-- Second In-Content Ad -->
+        <!-- Google AdSense Ad Slot — In-Content Mid-Article -->
+        <div class="ad-slot ad-slot-inline" aria-label="Advertisement">
+          Advertisement
+          <!-- REPLACE THIS COMMENT WITH YOUR ADSENSE MID-ARTICLE CODE -->
+        </div>
+
+        <!-- ---- Section 4: Tips ---- -->
+        <section id="art-tips">
+          <h2>Professional Tips for Better Video Recording with a Teleprompter</h2>
+          <p>
+            Knowing how to technically use a <strong>video teleprompter online</strong> is only part of the equation. Here are professional-grade tips to ensure your recordings look and feel as natural and polished as possible:
+          </p>
+
+          <h3>Position the Screen Close to Your Camera Lens</h3>
+          <p>
+            The closer your teleprompter screen is to your camera lens, the more natural your eye contact will appear on video. If your screen is far to the side, viewers will notice you are reading. Ideally, place your laptop or monitor directly behind or just below your camera lens. Alternatively, prop your device up on a stack of books so the camera and screen are at the same eye level.
+          </p>
+
+          <h3>Practise With Your Script Before Recording</h3>
+          <p>
+            Even with a teleprompter, reading aloud for the first time during recording rarely sounds natural. Run through your script two or three times before hitting record. This familiarises you with the content so your delivery feels conversational rather than read.
+          </p>
+
+          <h3>Slow Down Your Scroll Speed</h3>
+          <p>
+            New teleprompter users almost always set the scroll speed too fast. Rushing through a script sounds frantic and reduces comprehension. Set your speed slower than feels comfortable, then adjust from there. A measured, slightly slower pace sounds far more authoritative and engaging on camera.
+          </p>
+
+          <h3>Use Larger Font Sizes Than You Think You Need</h3>
+          <p>
+            Squinting at small text will cause facial tension that is clearly visible on camera. Use a font size large enough that you can read each line comfortably without leaning in or narrowing your eyes. Start at 50–60px and adjust based on your distance from the screen.
+          </p>
+
+          <h3>Add Natural Pauses to Your Script</h3>
+          <p>
+            Insert deliberate pauses — marked in your script with three dots (...) or a blank line — at the end of key points. This gives your audience time to absorb what you have said, and it gives you a natural moment to breathe, which keeps your energy and vocal quality consistent throughout the recording.
+          </p>
+
+          <h3>Match Your Scroll Speed to Your Speaking Pace</h3>
+          <p>
+            The teleprompter should serve you — not the other way around. If you are speaking faster than the scroll, increase the speed slightly. If you are rushing to keep up, slow it down. Using PrompterPro's Pause feature during recording allows you to stop and recollect yourself at any point without restarting.
+          </p>
+
+          <h3>Keep Good Lighting in Front of You</h3>
+          <p>
+            Your face needs to be well-lit regardless of the background your teleprompter is showing. Use a ring light, softbox, or a large window as your primary light source, positioned in front of you. A well-lit face with confident eye contact is the hallmark of professional-quality video content.
+          </p>
+
+          <h3>Break Long Scripts Into Sections</h3>
+          <p>
+            Rather than loading your entire 10-minute script into one teleprompter session, break it into logical sections and record each section separately. This reduces mental fatigue, improves energy levels on camera, and makes editing far easier in post-production.
+          </p>
+        </section>
+
+        <!-- ---- Section 5: FAQ ---- -->
+        <section id="art-faq">
+          <h2>Frequently Asked Questions (FAQs)</h2>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+              Is PrompterPro really free to use?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, PrompterPro is completely free. There are no hidden fees, no subscription plans, and no account registration required. Simply open the website in any modern browser and start using the teleprompter tool immediately. The site is supported by unobtrusive advertisements.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+              Can I use PrompterPro on my phone or tablet?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. PrompterPro is fully responsive and works on smartphones, tablets, laptops, and desktop computers. All controls adapt to smaller screens, and the teleprompter display resizes appropriately. For the best experience recording video, we recommend using a tablet or laptop with a larger screen so you can read comfortably at a natural distance.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+              Does the teleprompter record my text or video?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>No. PrompterPro does not record, store, or transmit any of your scripts, video, or personal data. The entire tool runs locally in your browser. Your text is never sent to any server. We take your privacy seriously — please read our Privacy Policy for full details.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+              What video formats are supported for background upload?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>PrompterPro accepts all common image formats (JPG, PNG, GIF, WebP) and video formats (MP4, WebM, MOV, OGG) for background upload. The file is processed entirely in your browser using the File API — no upload to any server takes place. Please note that very large video files may affect browser performance on older devices.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+              Can I use PrompterPro for YouTube Shorts and vertical video?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Absolutely. PrompterPro supports both 16:9 (standard horizontal) and 9:16 (vertical) aspect ratios. Simply select 9:16 from the Aspect Ratio dropdown to switch the display to portrait mode — perfect for YouTube Shorts, Instagram Reels, TikTok, and any other vertical video format.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+              How do I stop the teleprompter mid-recording?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Click the <strong>Pause</strong> button (which appears after you click Start) to instantly freeze the scroll at any point. Click <strong>Resume</strong> to continue from exactly where you paused. If you want to start completely from the beginning, click the <strong>Reset</strong> button. This lets you restart your script without refreshing the page or losing your settings.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+              Does PrompterPro work without an internet connection?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>PrompterPro requires an internet connection to initially load the page, including its fonts and icon libraries. Once the page has fully loaded in your browser, the core teleprompter functionality works without an active connection. However, for full functionality and the latest version of the tool, we recommend keeping an internet connection active.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Closing -->
+        <section id="art-conclusion">
+          <h2>Start Using the Best Free Online Teleprompter Tool Today</h2>
+          <p>
+            Whether you are recording your first YouTube video, preparing for a major conference presentation, practising a speech, or creating professional training content, a <strong>free online teleprompter tool</strong> is one of the most impactful upgrades you can make to your recording workflow.
+          </p>
+          <p>
+            PrompterPro gives you everything you need: a smooth, fully-customisable <strong>teleprompter script reader</strong> that runs entirely in your browser, supports custom video backgrounds, adapts to both horizontal and vertical formats, and includes professional-grade controls for font, speed, style, and animation — all at absolutely no cost.
+          </p>
+          <p>
+            Stop wasting hours on retakes. Stop struggling to remember your lines. Stop looking unprofessional in your recordings. Use PrompterPro and deliver your best content every single time.
+          </p>
+          <p style="margin-top: 1.5rem;">
+            <a href="#" onclick="showPage('home')" style="background: linear-gradient(135deg, var(--primary-cyan), var(--secondary-blue)); color: var(--dark-bg); font-weight: 700; padding: 0.85rem 2rem; border-radius: 30px; text-decoration: none; display: inline-block; transition: opacity 0.2s;">
+              ▶ Launch the Free Teleprompter Tool
+            </a>
+          </p>
+        </section>
+
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="article-sidebar" aria-label="Article Sidebar">
+        <!-- Table of Contents -->
+        <div class="toc-box">
+          <h4><i class="fas fa-list"></i> In This Guide</h4>
+          <ol>
+            <li><a href="#art-intro">What Is a Teleprompter?</a></li>
+            <li><a href="#art-benefits">Benefits for YouTubers</a></li>
+            <li><a href="#art-how-to">How to Use PrompterPro</a></li>
+            <li><a href="#art-tips">Professional Tips</a></li>
+            <li><a href="#art-faq">FAQ</a></li>
+            <li><a href="#art-conclusion">Get Started</a></li>
+          </ol>
+        </div>
+
+        <!-- Google AdSense Ad Slot — Sidebar 300x600 -->
+        <div class="ad-slot ad-slot-sidebar" aria-label="Advertisement">
+          Advertisement
+          <!-- REPLACE THIS COMMENT WITH YOUR ADSENSE SIDEBAR CODE -->
+        </div>
+      </aside>
+
+    </div><!-- end .article-layout -->
+  </div><!-- end #page-article -->
+
+  <!-- ============================================================
+       PAGE: ABOUT US
+  ============================================================ -->
+  <div id="page-about" class="page-section">
+    <div class="content-page">
+      <h1>About Us</h1>
+      <p class="page-subtitle">Learn about PrompterPro and the team behind it.</p>
+
+      <h2>Who We Are</h2>
+      <p>
+        PrompterPro is a free, browser-based teleprompter tool designed and built by a small team of web developers and content creators who were frustrated by the lack of a truly professional, zero-cost teleprompter option online. We built the tool we wished existed — and then made it free for everyone.
+      </p>
+      <p>
+        Our mission is simple: to make professional-quality teleprompter technology accessible to every creator, speaker, educator, journalist, and communicator in the world — regardless of budget, technical skill, or experience level.
+      </p>
+
+      <h2>What We Offer</h2>
+      <p>PrompterPro provides a complete suite of teleprompter features entirely within your browser:</p>
+      <ul>
+        <li>Smooth, time-based scroll animation with adjustable speed</li>
+        <li>Custom image and video background support</li>
+        <li>Full font customisation: size, family, color, bold, italic, stroke, shadow</li>
+        <li>Adjustable line spacing and text width</li>
+        <li>Text position control: left, center, or right alignment</li>
+        <li>16:9 and 9:16 aspect ratio switching</li>
+        <li>Decorative animation effects: Fireworks, Flower Rain, Star Fall, Rising Hearts</li>
+        <li>Start, Pause, Resume, and Reset scroll controls</li>
+      </ul>
+
+      <h2>Our Commitment to Privacy</h2>
+      <p>
+        We take your privacy seriously. PrompterPro does not collect, store, or transmit any of your scripts, personal information, or usage data. Everything runs locally in your browser. Please review our <a href="#" onclick="showPage('privacy')">Privacy Policy</a> for full details.
+      </p>
+
+      <h2>Contact Us</h2>
+      <p>
+        Have a suggestion, found a bug, or want to say hello? We would love to hear from you. Visit our <a href="#" onclick="showPage('contact')">Contact page</a> to send us a message.
+      </p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE: CONTACT US
+  ============================================================ -->
+  <div id="page-contact" class="page-section">
+    <div class="content-page">
+      <h1>Contact Us</h1>
+      <p class="page-subtitle">Have a question, suggestion, or feedback? We'd love to hear from you.</p>
+
+      <h2>Get in Touch</h2>
+      <p>Fill out the form below and we will respond as soon as possible. We aim to reply within 1–3 business days.</p>
+
+      <div class="contact-form" id="contactForm">
+        <input type="text" id="cf-name" placeholder="Your Full Name" aria-label="Full Name" required>
+        <input type="email" id="cf-email" placeholder="Your Email Address" aria-label="Email Address" required>
+        <select id="cf-subject" aria-label="Subject">
+          <option value="" disabled selected>Select a Subject</option>
+          <option value="bug">Report a Bug</option>
+          <option value="feature">Feature Request</option>
+          <option value="general">General Inquiry</option>
+          <option value="business">Business / Partnership</option>
+          <option value="other">Other</option>
+        </select>
+        <textarea id="cf-message" placeholder="Your message..." aria-label="Message" required></textarea>
+        <button type="button" onclick="submitContactForm()">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+        <p id="contactSuccess">✅ Thank you! Your message has been received. We'll be in touch soon.</p>
+      </div>
+
+      <h2 style="margin-top: 3rem;">Other Ways to Reach Us</h2>
+      <p><i class="fas fa-envelope" style="color: var(--primary-cyan); margin-right: 0.5rem;"></i> Email: <a href="mailto:hello@prompterpro.online">hello@prompterpro.online</a></p>
+      <p><i class="fas fa-globe" style="color: var(--primary-cyan); margin-right: 0.5rem;"></i> Website: <a href="https://www.prompterpro.online">www.prompterpro.online</a></p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE: PRIVACY POLICY
+  ============================================================ -->
+  <div id="page-privacy" class="page-section">
+    <div class="content-page">
+      <h1>Privacy Policy</h1>
+      <p class="page-subtitle">Last Updated: January 1, 2025</p>
+
+      <p>
+        This Privacy Policy describes how PrompterPro ("we", "us", or "our") collects, uses, and shares information when you visit and use our website located at <strong>www.prompterpro.online</strong> (the "Service").
+      </p>
+      <p>
+        By using the Service, you agree to the collection and use of information in accordance with this policy. Please read it carefully.
+      </p>
+
+      <h2>1. Information We Collect</h2>
+      <h3>Information You Provide</h3>
+      <p>
+        When you use the contact form on our website, we may collect your name, email address, and the content of your message. We use this information solely to respond to your inquiry and do not share it with third parties.
+      </p>
+      <h3>Automatically Collected Information</h3>
+      <p>
+        Like most websites, we may automatically receive and log certain non-personally identifiable information when your browser accesses our server, including your IP address (in anonymised form), browser type and version, the pages you visit, and the date and time of your visit. This information is used only for statistical analysis and to improve our service.
+      </p>
+      <h3>Teleprompter Script Data</h3>
+      <p>
+        <strong>Your script text and any media files you upload are never transmitted to our servers.</strong> The entire teleprompter tool operates locally within your browser using client-side JavaScript. We have no access to, and do not store, any content you enter into the tool.
+      </p>
+
+      <h2>2. Cookies and Tracking Technologies</h2>
+      <p>
+        We use cookies and similar tracking technologies to improve your browsing experience and for analytical purposes. We may also use third-party advertising partners, including <strong>Google AdSense</strong>, which may use cookies to serve personalised advertisements based on your browsing history.
+      </p>
+      <p>
+        Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to our site and other sites on the Internet. You may opt out of personalised advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a>.
+      </p>
+
+      <h2>3. Third-Party Advertising (Google AdSense)</h2>
+      <p>
+        We use Google AdSense to display advertisements on our website. Google AdSense is a service provided by Google LLC. Google AdSense uses cookies to serve ads based on a user's prior visits to our website or other websites on the Internet. For more information about how Google uses data from partner websites, please visit <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Google's Privacy &amp; Terms</a>.
+      </p>
+      <p>
+        Third-party vendors, including Google, use cookies to serve ads based on prior visits to our website. Google's use of the DoubleClick cookie enables it and its partners to serve ads to users based on their visits to our site and other sites on the Internet. We do not have access to or control over cookies used by third-party advertisers.
+      </p>
+
+      <h2>4. How We Use Your Information</h2>
+      <p>We use the information we collect to:</p>
+      <ul>
+        <li>Provide, operate, and maintain our website and services</li>
+        <li>Improve and personalise your experience</li>
+        <li>Respond to your comments, questions, and customer service requests</li>
+        <li>Analyse website usage to improve our content and features</li>
+        <li>Display relevant advertising through Google AdSense</li>
+        <li>Comply with applicable laws and regulations</li>
+      </ul>
+
+      <h2>5. Data Sharing and Disclosure</h2>
+      <p>
+        We do not sell, trade, or rent your personal information to third parties. We may share information in the following limited circumstances:
+      </p>
+      <ul>
+        <li><strong>Service Providers:</strong> We may share information with trusted third-party service providers who assist us in operating our website, subject to confidentiality agreements.</li>
+        <li><strong>Legal Requirements:</strong> We may disclose information if required to do so by law or in response to valid requests by public authorities.</li>
+        <li><strong>Business Transfers:</strong> If we are involved in a merger, acquisition, or asset sale, your information may be transferred.</li>
+      </ul>
+
+      <h2>6. Data Retention</h2>
+      <p>
+        We retain contact form data only for as long as necessary to respond to your inquiry. Server log data is retained for a maximum of 30 days. We do not retain any teleprompter script or media data, as this is never transmitted to us.
+      </p>
+
+      <h2>7. Your Rights</h2>
+      <p>
+        Depending on your location, you may have certain rights regarding your personal information, including the right to access, correct, or delete your data. To exercise these rights, please contact us at <a href="mailto:privacy@prompterpro.online">privacy@prompterpro.online</a>.
+      </p>
+
+      <h2>8. Children's Privacy</h2>
+      <p>
+        Our Service is not directed to children under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If we discover that a child under 13 has provided us with personal information, we will delete it immediately.
+      </p>
+
+      <h2>9. Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page with an updated date. We encourage you to review this policy periodically.
+      </p>
+
+      <h2>10. Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy, please <a href="#" onclick="showPage('contact')">contact us</a> or email <a href="mailto:privacy@prompterpro.online">privacy@prompterpro.online</a>.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE: TERMS AND CONDITIONS
+  ============================================================ -->
+  <div id="page-terms" class="page-section">
+    <div class="content-page">
+      <h1>Terms and Conditions</h1>
+      <p class="page-subtitle">Last Updated: January 1, 2025</p>
+
+      <p>
+        Please read these Terms and Conditions ("Terms") carefully before using the PrompterPro website ("Service") operated by PrompterPro ("us", "we", or "our"). By accessing or using our Service, you agree to be bound by these Terms.
+      </p>
+
+      <h2>1. Acceptance of Terms</h2>
+      <p>
+        By accessing and using this website, you accept and agree to be bound by these Terms and our Privacy Policy. If you do not agree with any part of these terms, you must not use our Service.
+      </p>
+
+      <h2>2. Use of the Service</h2>
+      <p>PrompterPro grants you a personal, non-exclusive, non-transferable, limited licence to use our free online teleprompter tool for lawful purposes, subject to these Terms. You agree to use the Service only for its intended purpose and in compliance with all applicable local, national, and international laws and regulations.</p>
+      <p>You must not:</p>
+      <ul>
+        <li>Use the Service for any unlawful, harmful, or fraudulent purpose</li>
+        <li>Attempt to gain unauthorised access to any part of the Service</li>
+        <li>Transmit any harmful, offensive, or disruptive content through the Service</li>
+        <li>Copy, modify, distribute, or reverse-engineer any part of the website's code without our prior written consent</li>
+        <li>Use automated scripts or bots to access or scrape the Service</li>
+      </ul>
+
+      <h2>3. Intellectual Property</h2>
+      <p>
+        The Service and its original content, features, design, and functionality are and will remain the exclusive property of PrompterPro. Our trademarks, service marks, and trade names may not be used in connection with any product or service without our prior written consent. Content you create using the teleprompter tool (your scripts and recordings) remains entirely your own intellectual property.
+      </p>
+
+      <h2>4. Advertisements</h2>
+      <p>
+        PrompterPro displays advertisements through Google AdSense to support the free availability of the Service. By using the Service, you acknowledge that advertisements may be displayed on the website. We are not responsible for the content of third-party advertisements.
+      </p>
+
+      <h2>5. Disclaimer of Warranties</h2>
+      <p>
+        The Service is provided on an "AS IS" and "AS AVAILABLE" basis without any warranties of any kind, either express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement. We do not warrant that the Service will be uninterrupted, error-free, or free of viruses or other harmful components.
+      </p>
+
+      <h2>6. Limitation of Liability</h2>
+      <p>
+        To the maximum extent permitted by applicable law, PrompterPro shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, or goodwill, arising out of or in connection with your use of the Service.
+      </p>
+
+      <h2>7. Third-Party Links</h2>
+      <p>
+        Our Service may contain links to third-party websites. These links are provided for your convenience only. We have no control over the content of those sites and accept no responsibility for them or for any loss or damage that may arise from your use of them.
+      </p>
+
+      <h2>8. Changes to the Service</h2>
+      <p>
+        We reserve the right to modify, suspend, or discontinue the Service at any time without notice. We shall not be liable to you or any third party for any modification, suspension, or discontinuation of the Service.
+      </p>
+
+      <h2>9. Changes to These Terms</h2>
+      <p>
+        We reserve the right to update these Terms at any time. We will notify you of significant changes by posting the revised Terms on this page with an updated date. Your continued use of the Service after any changes constitutes your acceptance of the new Terms.
+      </p>
+
+      <h2>10. Governing Law</h2>
+      <p>
+        These Terms shall be governed by and construed in accordance with applicable law. Any disputes arising under or in connection with these Terms shall be subject to the exclusive jurisdiction of the competent courts.
+      </p>
+
+      <h2>11. Contact Us</h2>
+      <p>If you have any questions about these Terms, please <a href="#" onclick="showPage('contact')">contact us</a>.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE: DISCLAIMER
+  ============================================================ -->
+  <div id="page-disclaimer" class="page-section">
+    <div class="content-page">
+      <h1>Disclaimer</h1>
+      <p class="page-subtitle">Last Updated: January 1, 2025</p>
+
+      <h2>General Disclaimer</h2>
+      <p>
+        The information provided on PrompterPro (www.prompterpro.online) is for general informational and educational purposes only. All information on the website is provided in good faith; however, we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any information on the website.
+      </p>
+      <p>
+        Under no circumstance shall we have any liability to you for any loss or damage of any kind incurred as a result of the use of the website or reliance on any information provided on the website. Your use of the website and your reliance on any information on the website is solely at your own risk.
+      </p>
+
+      <h2>Tool Disclaimer</h2>
+      <p>
+        PrompterPro provides a free online teleprompter tool as-is, without guarantees of uninterrupted availability, accuracy of scroll timing, or suitability for any specific professional purpose. We recommend testing the tool thoroughly before any live or critical recording session.
+      </p>
+      <p>
+        The tool processes all data (text and media) locally within your browser. We do not access, collect, or store any script content or media files you use with the teleprompter. However, we are not responsible for any data loss resulting from browser crashes, tab closures, or other technical issues.
+      </p>
+
+      <h2>Advertising Disclaimer</h2>
+      <p>
+        PrompterPro is supported by advertising revenue through Google AdSense. The advertisements displayed on this website are served by Google and its advertising partners. The presence of an advertisement does not constitute our endorsement of the advertised product or service. We have no control over the specific advertisements that are served.
+      </p>
+
+      <h2>External Links Disclaimer</h2>
+      <p>
+        The website may contain links to external websites that are not provided or maintained by us. Please note that we do not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites. Inclusion of any link does not imply our endorsement of the linked site.
+      </p>
+
+      <h2>Professional Use Disclaimer</h2>
+      <p>
+        While PrompterPro is suitable for a wide range of use cases — including personal YouTube videos, presentations, educational content, and public speaking practice — it is provided as a consumer-grade free tool. Users requiring mission-critical, broadcast-quality, or legally regulated teleprompter services should evaluate whether this free tool meets their specific professional requirements.
+      </p>
+
+      <h2>Contact</h2>
+      <p>If you have any questions about this Disclaimer, please <a href="#" onclick="showPage('contact')">contact us</a>.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       FOOTER AD SLOT
+  ============================================================ -->
+  <div style="max-width:1200px; margin: 0 auto; padding: 0 1.5rem;">
+    <!-- Google AdSense Ad Slot — Footer Banner 728x90 -->
+    <div class="ad-slot ad-slot-footer" aria-label="Advertisement">
+      Advertisement
+      <!-- REPLACE THIS COMMENT WITH YOUR ADSENSE FOOTER CODE -->
+    </div>
+  </div>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+
+      <div class="footer-col">
+        <h5>PrompterPro</h5>
+        <p>A free online teleprompter tool for YouTubers, presenters, and public speakers. Read scripts smoothly while keeping eye contact with your camera.</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Tool</h5>
+        <ul>
+          <li><a href="#" onclick="showPage('home')">Teleprompter Tool</a></li>
+          <li><a href="#" onclick="showPage('article')">How-To Guide</a></li>
+          <li><a href="#" onclick="showPage('article'); document.getElementById('art-faq').scrollIntoView({behavior:'smooth'})">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#" onclick="showPage('about')">About Us</a></li>
+          <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#" onclick="showPage('privacy')">Privacy Policy</a></li>
+          <li><a href="#" onclick="showPage('terms')">Terms &amp; Conditions</a></li>
+          <li><a href="#" onclick="showPage('disclaimer')">Disclaimer</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="footerYear"></span> PrompterPro. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#" onclick="showPage('privacy')">Privacy</a>
+        <a href="#" onclick="showPage('terms')">Terms</a>
+        <a href="#" onclick="showPage('disclaimer')">Disclaimer</a>
+        <a href="#" onclick="showPage('contact')">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+
+    /* ====================================================
+       PAGE ROUTING
+    ==================================================== */
+    const pages = ['home','article','about','contact','privacy','terms','disclaimer'];
+
+    function showPage(pageId) {
+      // Hide all pages
+      pages.forEach(p => {
+        const el = document.getElementById('page-' + p);
+        if (el) el.classList.remove('active');
+        const navEl = document.getElementById('nav-' + p);
+        if (navEl) navEl.classList.remove('active');
+      });
+
+      // Show requested page
+      const target = document.getElementById('page-' + pageId);
+      if (target) target.classList.add('active');
+
+      // Update nav active state
+      const navTarget = document.getElementById('nav-' + pageId);
+      if (navTarget) navTarget.classList.add('active');
+
+      // Update page <title> and meta description for SEO
+      const pageMeta = {
+        home:       { title: 'Free Online Teleprompter Tool – PrompterPro | Script Reader for Videos', desc: 'Use PrompterPro\'s free online teleprompter tool to read scripts smoothly while recording. Perfect for YouTubers and speakers. No download needed.' },
+        article:    { title: 'Free Online Teleprompter Guide – How to Use, Tips & FAQ | PrompterPro', desc: 'Complete guide to using a free online teleprompter tool. Includes step-by-step instructions, professional tips, and FAQ for YouTubers and speakers.' },
+        about:      { title: 'About Us – PrompterPro Free Teleprompter Tool', desc: 'Learn about PrompterPro, the free browser-based teleprompter tool built for content creators, educators, and public speakers worldwide.' },
+        contact:    { title: 'Contact Us – PrompterPro', desc: 'Get in touch with the PrompterPro team. Send us your questions, bug reports, or feature requests.' },
+        privacy:    { title: 'Privacy Policy – PrompterPro Free Teleprompter', desc: 'PrompterPro Privacy Policy. Learn how we handle your data, cookies, and Google AdSense advertising on our free teleprompter website.' },
+        terms:      { title: 'Terms and Conditions – PrompterPro', desc: 'Read the Terms and Conditions for using PrompterPro\'s free online teleprompter tool.' },
+        disclaimer: { title: 'Disclaimer – PrompterPro Free Teleprompter Tool', desc: 'Official disclaimer for PrompterPro. Understand the limitations and terms of use of our free teleprompter website.' }
+      };
+      if (pageMeta[pageId]) {
+        document.title = pageMeta[pageId].title;
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', pageMeta[pageId].desc);
+      }
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Close mobile nav
+      const nav = document.getElementById('mainNav');
+      nav.classList.remove('open');
+
+      return false; // prevent default link behavior
+    }
+
+    /* ====================================================
+       HAMBURGER MENU
+    ==================================================== */
+    document.getElementById('hamburger').addEventListener('click', function() {
+      const nav = document.getElementById('mainNav');
+      const isOpen = nav.classList.toggle('open');
+      this.setAttribute('aria-expanded', isOpen);
+    });
+
+    /* ====================================================
+       CONTACT FORM SIMULATION
+    ==================================================== */
+    function submitContactForm() {
+      const name    = document.getElementById('cf-name').value.trim();
+      const email   = document.getElementById('cf-email').value.trim();
+      const message = document.getElementById('cf-message').value.trim();
+      if (!name || !email || !message) {
+        alert('Please fill in your name, email, and message before sending.');
+        return;
+      }
+      // Show success message (in production, replace with a real form backend or Formspree)
+      document.getElementById('contactSuccess').style.display = 'block';
+      document.getElementById('cf-name').value = '';
+      document.getElementById('cf-email').value = '';
+      document.getElementById('cf-subject').selectedIndex = 0;
+      document.getElementById('cf-message').value = '';
+    }
+
+    /* ====================================================
+       FAQ ACCORDION
+    ==================================================== */
+    function toggleFaq(btn) {
+      const isOpen = btn.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+      const answer = btn.nextElementSibling;
+      if (answer) answer.classList.toggle('open', isOpen);
+    }
+
+    /* ====================================================
+       FOOTER YEAR
+    ==================================================== */
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    /* ====================================================
+       ORIGINAL TELEPROMPTER TOOL JAVASCRIPT (unchanged)
+    ==================================================== */
+
+    // --- DOM ELEMENT SELECTION ---
+    const teleprompterWrapper = document.querySelector('.teleprompter-wrapper');
+    const teleprompter        = document.getElementById('teleprompter');
+    const bgVideo             = document.getElementById('bgVideo');
+    const mediaUpload         = document.getElementById('mediaUpload');
+    const tpText              = document.getElementById('tpText');
+    const fontColor           = document.getElementById('fontColor');
+    const fontSize            = document.getElementById('fontSize');
+    const fontFamily          = document.getElementById('fontFamily');
+    const lineHeight          = document.getElementById('lineHeight');
+    const textWidth           = document.getElementById('textWidth');
+    const textPositionSelect  = document.getElementById('textPosition');
+    const textAlignJustifySelect = document.getElementById('textAlignJustify');
+    const bold                = document.getElementById('bold');
+    const italic              = document.getElementById('italic');
+    const stroke              = document.getElementById('stroke');
+    const strokeColor         = document.getElementById('strokeColor');
+    const strokeThickness     = document.getElementById('strokeThickness');
+    const strokeThicknessValue= document.getElementById('strokeThicknessValue');
+    const shadow              = document.getElementById('shadow');
+    const shadowColor         = document.getElementById('shadowColor');
+    const shadowOpacity       = document.getElementById('shadowOpacity');
+    const shadowOpacityValue  = document.getElementById('shadowOpacityValue');
+    const scrollSpeedInput    = document.getElementById('scrollSpeed');
+    const scrollControlButton = document.getElementById('scrollControlButton');
+    const resetScrollBtn      = document.getElementById('resetScrollBtn');
+    const bgSizeSelect        = document.getElementById('bgSize');
+    const animationSelect     = document.getElementById('animationSelect');
+
+    // --- STATE VARIABLES ---
+    let scrollAnimationId  = null;
+    let particleAnimationId= null;
+    let isPaused           = false;
+    let currentY           = 0;
+    let lastTimestamp      = null;
+
+    // --- HELPER FUNCTIONS ---
+    const hexToRgba = (hex, alpha) => {
+      let r = 0, g = 0, b = 0;
+      if (hex.length === 4) { r = "0x" + hex[1] + hex[1]; g = "0x" + hex[2] + hex[2]; b = "0x" + hex[3] + hex[3]; }
+      else if (hex.length === 7) { r = "0x" + hex[1] + hex[2]; g = "0x" + hex[3] + hex[4]; b = "0x" + hex[5] + hex[6]; }
+      return `rgba(${+r},${+g},${+b},${alpha})`;
+    };
+
+    // --- CORE STYLING AND POSITIONING FUNCTIONS ---
+    function updateTextPositionAndWidth() {
+      const position        = textPositionSelect.value;
+      const widthPercentage = textWidth.value;
+      const padding         = 20;
+      const calculatedWidth = `calc(${widthPercentage}% - ${padding * 2}px)`;
+      teleprompter.style.width = calculatedWidth;
+      switch (position) {
+        case 'left':
+          teleprompter.style.left   = '0';
+          teleprompter.style.right  = 'auto';
+          teleprompter.style.margin = '0';
+          break;
+        case 'right':
+          teleprompter.style.left   = 'auto';
+          teleprompter.style.right  = '0';
+          teleprompter.style.margin = '0';
+          break;
+        case 'center':
+        default:
+          teleprompter.style.left      = '50%';
+          teleprompter.style.right     = 'auto';
+          teleprompter.style.transform = `translateX(-50%) translateY(${currentY}px)`;
+          teleprompter.style.margin    = '0 auto';
+          break;
+      }
+      if (position !== 'center') {
+        teleprompter.style.transform = `translateY(${currentY}px)`;
+      }
+    }
+
+    function updateStyle() {
+      updateTextPositionAndWidth();
+      teleprompter.style.textAlign   = textAlignJustifySelect.value;
+      teleprompter.style.color       = fontColor.value;
+      teleprompter.style.fontSize    = `${fontSize.value}px`;
+      teleprompter.style.fontFamily  = fontFamily.value;
+      teleprompter.style.lineHeight  = lineHeight.value;
+      teleprompter.style.fontWeight  = bold.checked   ? '700'   : '400';
+      teleprompter.style.fontStyle   = italic.checked ? 'italic': 'normal';
+      teleprompter.style.webkitTextStroke = stroke.checked ? `${strokeThickness.value}px ${strokeColor.value}` : 'none';
+      teleprompter.style.textShadow  = shadow.checked ? `2px 2px 8px ${hexToRgba(shadowColor.value, shadowOpacity.value)}` : 'none';
+    }
+
+    // --- SCROLLING LOGIC (requestAnimationFrame) ---
+    const animateScroll = (timestamp) => {
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const delta = timestamp - lastTimestamp;
+      lastTimestamp = timestamp;
+      const speed          = parseFloat(scrollSpeedInput.value);
+      const pixelsPerSecond= speed * 50;
+      currentY -= (pixelsPerSecond * delta / 1000);
+      if (textPositionSelect.value === 'center') {
+        teleprompter.style.transform = `translateX(-50%) translateY(${currentY}px)`;
+      } else {
+        teleprompter.style.transform = `translateY(${currentY}px)`;
+      }
+      if (currentY <= -teleprompter.offsetHeight) {
+        handleFullReset();
+      } else {
+        scrollAnimationId = requestAnimationFrame(animateScroll);
+      }
+    };
+
+    function startScroll() {
+      const textHeight    = teleprompter.offsetHeight;
+      const wrapperHeight = teleprompterWrapper.offsetHeight;
+      if (textHeight <= wrapperHeight) return;
+      currentY = wrapperHeight;
+      if (textPositionSelect.value === 'center') {
+        teleprompter.style.transform = `translateX(-50%) translateY(${currentY}px)`;
+      } else {
+        teleprompter.style.transform = `translateY(${currentY}px)`;
+      }
+      lastTimestamp = null;
+      isPaused = false;
+      scrollAnimationId = requestAnimationFrame(animateScroll);
+    }
+
+    function pauseScroll() {
+      if (!scrollAnimationId) return;
+      cancelAnimationFrame(scrollAnimationId);
+      isPaused = true;
+    }
+
+    function resumeScroll() {
+      if (!scrollAnimationId || !isPaused) return;
+      lastTimestamp = null;
+      isPaused = false;
+      scrollAnimationId = requestAnimationFrame(animateScroll);
+    }
+
+    function handleScrollControl() {
+      if (scrollAnimationId === null) {
+        startScroll();
+        if (scrollAnimationId) scrollControlButton.textContent = 'Pause';
+      } else if (isPaused) {
+        resumeScroll();
+        scrollControlButton.textContent = 'Pause';
+      } else {
+        pauseScroll();
+        scrollControlButton.textContent = 'Resume';
+      }
+    }
+
+    function resetVerticalPosition() {
+      const wrapperHeight = teleprompterWrapper.offsetHeight;
+      const textHeight    = teleprompter.offsetHeight;
+      const initialY = (textHeight < wrapperHeight) ? ((wrapperHeight - textHeight) / 2) : 20;
+      currentY = initialY;
+      if (textPositionSelect.value === 'center') {
+        teleprompter.style.transform = `translateX(-50%) translateY(${currentY}px)`;
+      } else {
+        teleprompter.style.transform = `translateY(${currentY}px)`;
+      }
+    }
+
+    function handleFullReset() {
+      if (scrollAnimationId)  cancelAnimationFrame(scrollAnimationId);
+      if (particleAnimationId) clearInterval(particleAnimationId);
+      scrollAnimationId  = null;
+      isPaused           = false;
+      animationSelect.value = 'none';
+      scrollControlButton.textContent = 'Start';
+      resetVerticalPosition();
+    }
+
+    // --- EVENT LISTENERS ---
+    tpText.addEventListener('input', () => {
+      teleprompter.textContent = tpText.value || "Your text will appear here...";
+      setTimeout(resetVerticalPosition, 20);
+    });
+
+    mediaUpload.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      teleprompterWrapper.style.backgroundImage = 'none';
+      bgVideo.src = ''; bgVideo.style.display = 'none';
+      if (bgVideo.src) URL.revokeObjectURL(bgVideo.src);
+      if (file) {
+        const objectURL = URL.createObjectURL(file);
+        if (file.type.startsWith('image/')) {
+          teleprompterWrapper.style.backgroundImage = `url(${objectURL})`;
+        } else if (file.type.startsWith('video/')) {
+          bgVideo.src = objectURL; bgVideo.style.display = 'block'; bgVideo.play();
+        }
+      }
+    });
+
+    [fontColor, fontFamily, strokeColor, shadowColor, textAlignJustifySelect, lineHeight, textWidth].forEach(el => el.addEventListener('input', updateStyle));
+    [bold, italic, stroke, shadow].forEach(el => el.addEventListener('change', updateStyle));
+    [fontSize, strokeThickness, shadowOpacity].forEach(el => el.addEventListener('input', () => {
+      if (el.id === 'strokeThickness') strokeThicknessValue.textContent = el.value;
+      if (el.id === 'shadowOpacity')   shadowOpacityValue.textContent   = el.value;
+      updateStyle();
+    }));
+
+    bgSizeSelect.addEventListener('change', () => {
+      teleprompterWrapper.style.aspectRatio = bgSizeSelect.value.replace(':', '/');
+      setTimeout(resetVerticalPosition, 50);
+    });
+
+    [fontSize, textPositionSelect, textWidth].forEach(el => el.addEventListener('change', () => {
+      updateStyle();
+      setTimeout(resetVerticalPosition, 50);
+    }));
+
+    scrollControlButton.addEventListener('click', handleScrollControl);
+    resetScrollBtn.addEventListener('click', handleFullReset);
+
+    // --- CONTINUOUS ANIMATION LISTENER ---
+    animationSelect.addEventListener('change', () => {
+      if (particleAnimationId) { clearInterval(particleAnimationId); particleAnimationId = null; }
+      const effect   = animationSelect.value;
+      if (effect === 'none') return;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
+      switch (effect) {
+        case 'fireworks':
+          particleAnimationId = setInterval(() => { confetti({ ...defaults, particleCount: 80, origin: { x: Math.random(), y: Math.random() - 0.2 } }); }, 400);
+          break;
+        case 'flowerRain':
+          particleAnimationId = setInterval(() => { confetti({ particleCount: 5, angle: 270, spread: 90, origin: { x: Math.random(), y: -0.1 }, gravity: 0.3, scalar: 1.5, shapes: ['🌸', '🌺', '🌼', '🌷'] }); }, 200);
+          break;
+        case 'starFall':
+          particleAnimationId = setInterval(() => { confetti({ particleCount: 3, angle: 270, spread: 100, origin: { x: Math.random(), y: -0.1 }, gravity: 0.5, shapes: ['star'], colors: ['#FFD700', '#FFFFFF'] }); }, 150);
+          break;
+        case 'risingHearts':
+          particleAnimationId = setInterval(() => { confetti({ particleCount: 3, angle: 90, spread: 120, origin: { x: Math.random(), y: 1.1 }, gravity: -0.3, shapes: ['heart'], colors: ['#ff0000', '#ff69b4'] }); }, 300);
+          break;
+      }
+    });
+
+    // --- INITIALIZATION ---
+    window.addEventListener('load', () => { updateStyle(); resetVerticalPosition(); });
+    window.addEventListener('resize', () => setTimeout(resetVerticalPosition, 50));
+
+  </script>
+</body>
+</html>
